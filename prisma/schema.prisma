@@ -26,3 +26,37 @@ model Product {
   @@index([material])
   @@index([threadSize])
 }
+
+model Order {
+  id            Int         @id @default(autoincrement())
+  orderNumber   String      @unique
+  firstName     String
+  lastName      String
+  email         String
+  phone         String      @default("")
+  address       String
+  zipCode       String
+  city          String
+  paymentMethod String
+  subtotal      Float
+  shipping      Float
+  codFee        Float
+  total         Float
+  status        String      @default("new")
+  createdAt     DateTime    @default(now())
+  items         OrderItem[]
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id        Int    @id @default(autoincrement())
+  orderId   Int
+  order     Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  name      String
+  sku       String
+  quantity  Int
+  price     Float
+  packSize  Int
+}

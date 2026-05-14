@@ -1,15 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/store/cart";
-import { Minus, Plus, Trash2, ShoppingCart } from "lucide-react";
+import { Minus, Plus, Trash2, ShoppingCart, ArrowRight } from "lucide-react";
 
 export default function CartSheet() {
   const { isOpen, closeCart, items, updateQuantity, removeItem, totalPrice } =
@@ -98,9 +98,14 @@ export default function CartSheet() {
               <p className="text-xs text-gray-400">
                 Ceny netto. Dostawa obliczana przy kasie.
               </p>
-              <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold h-11">
+              <Link
+                href="/checkout"
+                onClick={closeCart}
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold h-11 flex items-center justify-center gap-2 text-sm transition-colors uppercase tracking-wide"
+              >
                 Przejdź do kasy
-              </Button>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </>
         )}
