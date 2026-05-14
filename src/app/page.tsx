@@ -1,65 +1,94 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Shield, Truck, Package } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-export default function Home() {
+const features = [
+  {
+    icon: Package,
+    title: "Szeroki asortyment",
+    desc: "Śruby, nakrętki, podkładki, kotwy — wszystko w jednym miejscu.",
+  },
+  {
+    icon: Shield,
+    title: "Certyfikowana jakość",
+    desc: "Produkty zgodne z normami DIN/ISO. Stal nierdzewna A2/A4, ocynk, mosiądz.",
+  },
+  {
+    icon: Truck,
+    title: "Szybka dostawa",
+    desc: "Zamówienia złożone do 14:00 wysyłamy tego samego dnia.",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      <section className="bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+          <span className="inline-block bg-orange-50 text-orange-600 text-xs font-semibold px-3 py-1 rounded-full mb-4 border border-orange-200">
+            Profesjonalne złączniki
+          </span>
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-5 tracking-tight">
+            Wszystko, czego potrzebujesz
+            <br />
+            <span className="text-orange-500">przykręcić na miejscu</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lg text-gray-500 max-w-xl mx-auto mb-8">
+            Śruby, nakrętki, podkładki i kotwy w szerokim wyborze materiałów i rozmiarów.
+            Dla profesjonalistów i majsterkowiczów.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/sklep"
+            className={cn(
+              buttonVariants({ size: "lg" }),
+              "bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 h-12 text-base"
+            )}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Przejdź do sklepu <ArrowRight className="ml-2 h-5 w-5" />
+          </Link>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {features.map(({ icon: Icon, title, desc }) => (
+            <div
+              key={title}
+              className="bg-white rounded-xl border border-gray-200 p-6 flex gap-4"
+            >
+              <div className="flex-shrink-0 w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center">
+                <Icon className="h-5 w-5 text-orange-500" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-1">{title}</h3>
+                <p className="text-sm text-gray-500">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-orange-500 py-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-extrabold text-white mb-4">
+            Ponad 500 referencji w magazynie
+          </h2>
+          <p className="text-orange-100 mb-7 max-w-lg mx-auto">
+            Od M3 do M12, od stali nierdzewnej po mosiądz — znajdź dokładnie to,
+            czego szukasz.
+          </p>
+          <Link
+            href="/sklep"
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "border-white text-orange-500 bg-white hover:bg-orange-50 font-semibold px-8 h-11"
+            )}
+          >
+            Przeglądaj katalog
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }
